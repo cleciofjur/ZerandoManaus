@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu - Zerando Manaus</title>
+  <title>Desafio Cultural - Zerando Manaus</title>
 
   <!-- Configurações PWA -->
   <meta name="theme-color" content="#0b3d2e">
@@ -22,16 +22,29 @@
 
 <body>
   <div class="device-container">
-    <section id="screen-menu" class="screen active">
-      <main class="content menu-content">
-        <div class="title-wrap">
-          <h1 class="game-title">ZERANDO<br>MANAUS</h1>
-          <p class="game-subtitle">Explore a capital da Amazônia!</p>
+    <section id="screen-level" class="screen active">
+      <header class="header">
+        <a class="btn-back" href="./mapa.html">← Mapa</a>
+        <h2 id="level-title">Fase 1</h2>
+        <span class="header-spacer"></span>
+      </header>
+
+      <main class="content level-content">
+        <div class="card level-card">
+          <div class="level-emoji" id="level-emoji">🎭</div>
+          <div class="location-badge" id="location-category">História & Cultura</div>
+          <h3 id="location-name">Teatro Amazonas</h3>
+          <p id="location-description">Carregando informações...</p>
         </div>
 
-        <div class="menu-actions">
-          <a class="btn btn-primary btn-block" href="./mapa.html">🌴 COMEÇAR</a>
-          <a class="btn btn-secondary btn-block" href="./como-jogar.html">❓ COMO JOGAR</a>
+        <div class="card text-card challenge-box">
+          <h4>🎯 Desafio Cultural</h4>
+          <p id="location-challenge">Carregando desafio...</p>
+        </div>
+
+        <div class="action-stack">
+          <button class="btn btn-primary btn-block" id="btn-complete" onclick="completeLevel()">Concluir Desafio (+50
+            XP)</button>
         </div>
       </main>
     </section>

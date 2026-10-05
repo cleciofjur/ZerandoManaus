@@ -62,7 +62,9 @@ function loadGame() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (saved && Array.isArray(saved.completedList)) {
-      gameState.completedList = saved.completedList;
+      gameState.completedList = [...new Set(saved.completedList.filter(
+        (id) => Number.isInteger(id) && Boolean(manausLocations[id])
+      ))];
     }
   } catch (e) { /* sem acesso ao armazenamento: começa do zero */ }
   recalcState();
@@ -82,35 +84,41 @@ function recalcState() {
 
 /* ============ NAVEGAÇÃO ============ */
 function navigateTo(screenId) {
-  const screens = document.querySelectorAll('.screen');
-  screens.forEach(screen => screen.classList.remove('active'));
-
-  const target = document.getElementById(screenId);
-  if (target) {
-    target.classList.add('active');
-  }
+  const pages = {
+    'screen-menu': 'index.html',
+    'screen-how-to-play': 'como-jogar.html',
+    'screen-map': 'mapa.html',
+    'screen-profile': 'perfil.html',
+    'screen-level': `fase.html?fase=${gameState.currentLevel}`
+  };
+  if (pages[screenId]) window.location.href = `./${pages[screenId]}`;
 }
 
 /* ============ FASE ============ */
 function openLevel(levelNumber) {
+  if (!manausLocations[levelNumber]) return;
   gameState.currentLevel = levelNumber;
-  const location = manausLocations[levelNumber];
-
-  if (location) {
-    document.getElementById('level-title').innerText = `Fase ${levelNumber}`;
-    document.getElementById('level-emoji').innerText = location.icon;
-    document.getElementById('location-category').innerText = location.category;
-    document.getElementById('location-name').innerText = location.name;
-    document.getElementById('location-description').innerText = location.description;
-    document.getElementById('location-challenge').innerText = location.challenge;
-  }
-
-  updateCompleteButton();
   navigateTo('screen-level');
+}
+
+function renderLevel() {
+  if (!document.getElementById('screen-level')) return;
+  const levelNumber = Number(new URLSearchParams(window.location.search).get('fase') || 1);
+  // Links inválidos abrem a primeira fase.
+  gameState.currentLevel = manausLocations[levelNumber] ? levelNumber : 1;
+  const location = manausLocations[gameState.currentLevel];
+  document.getElementById('level-title').innerText = `Fase ${gameState.currentLevel}`;
+  document.getElementById('level-emoji').innerText = location.icon;
+  document.getElementById('location-category').innerText = location.category;
+  document.getElementById('location-name').innerText = location.name;
+  document.getElementById('location-description').innerText = location.description;
+  document.getElementById('location-challenge').innerText = location.challenge;
+  updateCompleteButton();
 }
 
 function updateCompleteButton() {
   const btn = document.getElementById('btn-complete');
+  if (!btn) return;
   const done = gameState.completedList.includes(gameState.currentLevel);
   btn.innerText = done ? '⭐ Desafio concluído!' : `Concluir Desafio (+${XP_PER_LEVEL} XP)`;
   btn.classList.toggle('is-done', done);
@@ -119,7 +127,7 @@ function updateCompleteButton() {
 
 // Concluir desafio e atualizar pontuação
 function completeLevel() {
-  if (gameState.completedList.includes(gameState.currentLevel)) return;
+  if (!document.getElementById('screen-level') || gameState.completedList.includes(gameState.currentLevel)) return;
 
   gameState.completedList.push(gameState.currentLevel);
   recalcState();
@@ -139,6 +147,7 @@ function completeLevel() {
 
 /* ============ INTERFACE: MAPA ============ */
 function updateMapUI() {
+  if (!document.getElementById('screen-map')) return;
   document.querySelectorAll('.node-btn').forEach((btn, i) => {
     btn.classList.toggle('done', gameState.completedList.includes(i + 1));
   });
@@ -150,6 +159,7 @@ function updateMapUI() {
 
 /* ============ INTERFACE: PERFIL ============ */
 function updateProfileUI() {
+  if (!document.getElementById('screen-profile')) return;
   document.getElementById('completed-levels').innerText = `${gameState.completedLevels} / ${TOTAL_LEVELS}`;
   document.getElementById('player-xp').innerText = `${gameState.xp} XP`;
   document.getElementById('player-level').innerText = gameState.level;
@@ -203,3 +213,12 @@ function launchConfetti() {
 loadGame();
 updateProfileUI();
 updateMapUI();
+renderLevel();
+
+// Ao voltar pelo navegador, sincroniza o progresso salvo em outras páginas.
+window.addEventListener('pageshow', () => {
+  loadGame();
+  updateProfileUI();
+  updateMapUI();
+  renderLevel();
+});
