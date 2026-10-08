@@ -5,7 +5,11 @@ funcionar e ser testada. Ela pode reescrever o que quiser, desde que mantenha
 os nomes e retornos das funções abaixo, que são o que a API usa.
 """
 
+from __future__ import annotations
+
 import json
+import os
+import tempfile
 from pathlib import Path
 
 PASTA = Path(__file__).parent
@@ -21,9 +25,19 @@ def _ler(caminho: Path) -> dict:
 
 
 def _gravar(caminho: Path, dados: dict) -> None:
-    with caminho.open("w", encoding="utf-8") as arquivo:
-        # ensure_ascii=False grava acentos legíveis ("Águas"), sem virar códigos de escape Unicode
-        json.dump(dados, arquivo, ensure_ascii=False, indent=2)
+    # Os GETs podem ler enquanto um POST grava. A troca atômica impede
+    # que eles encontrem um JSON truncado ou incompleto.
+    temporario = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=caminho.parent, delete=False
+        ) as arquivo:
+            temporario = Path(arquivo.name)
+            json.dump(dados, arquivo, ensure_ascii=False, indent=2)
+        os.replace(temporario, caminho)
+    finally:
+        if temporario is not None:
+            temporario.unlink(missing_ok=True)
 
 
 def listar_fases() -> dict[str, dict]:
