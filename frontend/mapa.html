@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zerando Manaus - O Jogo</title>
+
+    <!-- Configurações PWA -->
+    <meta name="theme-color" content="#0b3d2e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Fonte pixel art (com fallback caso esteja offline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <script src="./script.js" defer></script>
+  </head>
+<body>
+<div class="device-container">
+<section id="screen-map" class="screen active">
+        <header class="header">
+          <button class="btn-back" onclick="navigateTo('screen-menu')">
+            ← Menu
+          </button>
+          <h2>Mapa de Manaus</h2>
+          <button
+            class="btn-icon"
+            onclick="navigateTo('screen-profile')"
+            aria-label="Perfil"
+          >
+            👤
+          </button>
+        </header>
+
+        <div class="progress-strip">
+          <span id="map-progress-text">0 / 6 locais</span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="map-progress-fill"></div>
+          </div>
+          <span id="map-xp">0 XP</span>
+        </div>
+
+        <main class="content map-content">
+          <div class="path-container">
+            <!-- Botões em Zigzag com Pontos Turísticos -->
+            <button
+              class="node-btn pos-1"
+              onclick="openLevel(1)"
+              title="Teatro Amazonas"
+            >
+              <span class="node-num">1</span>
+              <span class="node-icon">🎭</span>
+              <span class="node-label">Teatro Amazonas</span>
+            </button>
+            <button
+              class="node-btn pos-2"
+              onclick="openLevel(2)"
+              title="Mercado Adolpho Lisboa"
+            >
+              <span class="node-num">2</span>
+              <span class="node-icon">🐟</span>
+              <span class="node-label">Mercado Municipal</span>
+            </button>
+            <button
+              class="node-btn pos-3"
+              onclick="openLevel(3)"
+              title="Praia da Ponta Negra"
+            >
+              <span class="node-num">3</span>
+              <span class="node-icon">🏖️</span>
+              <span class="node-label">Ponta Negra</span>
+            </button>
+            <button
+              class="node-btn pos-4"
+              onclick="openLevel(4)"
+              title="Encontro das Águas"
+            >
+              <span class="node-num">4</span>
+              <span class="node-icon">🌊</span>
+              <span class="node-label">Encontro das Águas</span>
+            </button>
+            <button
+              class="node-btn pos-5"
+              onclick="openLevel(5)"
+              title="MUSA - Museu da Amazônia"
+            >
+              <span class="node-num">5</span>
+              <span class="node-icon">🦋</span>
+              <span class="node-label">MUSA</span>
+            </button>
+            <button
+              class="node-btn pos-6"
+              onclick="openLevel(6)"
+              title="Ponte Rio Negro"
+            >
+              <span class="node-num">6</span>
+              <span class="node-icon">🌉</span>
+              <span class="node-label">Ponte Rio Negro</span>
+            </button>
+          </div>
+        </main>
+      </section>
+<div class="toast" id="toast" aria-live="polite"></div>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+</div>
+</body>
+</html>

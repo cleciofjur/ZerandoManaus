@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zerando Manaus - O Jogo</title>
+
+    <!-- Configurações PWA -->
+    <meta name="theme-color" content="#0b3d2e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Fonte pixel art (com fallback caso esteja offline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <script src="./script.js" defer></script>
+  </head>
+<body>
+<div class="device-container">
+<section id="screen-menu" class="screen active">
+        <main class="content menu-content">
+          <div class="title-wrap">
+            <h1 class="game-title">ZERANDO<br />MANAUS</h1>
+            <p class="game-subtitle">Explore a capital da Amazônia!</p>
+          </div>
+
+          <div class="menu-actions">
+            <button
+              class="btn btn-primary btn-block"
+              onclick="navigateTo('screen-map')"
+            >
+              🌴 COMEÇAR
+            </button>
+            <button
+              class="btn btn-secondary btn-block"
+              onclick="navigateTo('screen-how-to-play')"
+            >
+              ❓ COMO JOGAR
+            </button>
+          </div>
+        </main>
+      </section>
+<div class="toast" id="toast" aria-live="polite"></div>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+</div>
+</body>
+</html>
