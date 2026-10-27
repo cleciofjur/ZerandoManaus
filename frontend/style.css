@@ -46,7 +46,7 @@
         height: 100vh;
         max-height: 667px;
         background: var(--mata)
-          url("./img/fundo-manaus.jpg")
+          url("./img/fundo-tela.jpg")
           center / cover no-repeat;
         border: 3px solid var(--folha);
         border-radius: 24px;
@@ -1029,7 +1029,7 @@
         margin-top: 4px;
       }
 
-      /* Fundo exclusivo da fase 1: Teatro Amazonas */
+/* Fundo exclusivo da fase 1: Teatro Amazonas */
 #screen-level[data-fase="1"],
 #screen-quiz[data-fase="1"] {
   background-image:
@@ -1045,6 +1045,46 @@
   background-image:
     linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
     url("./img/fundo-mercado.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fundo exclusivo da fase 3: Praia Ponta Negra */
+#screen-level[data-fase="3"],
+#screen-quiz[data-fase="3"] {
+  background-image:
+    linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
+    url("./img/fundo-manaus.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fundo exclusivo da fase 4: Encontro das Aguas */
+#screen-level[data-fase="4"],
+#screen-quiz[data-fase="4"] {
+  background-image:
+    linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
+    url("./img/fundo-encontroAguas.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fundo exclusivo da fase 5: Musa */
+#screen-level[data-fase="5"],
+#screen-quiz[data-fase="5"] {
+  background-image:
+    linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
+    url("./img/fundo-musa.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fundo exclusivo da fase 6: Ponte Rio Negro*/
+#screen-level[data-fase="6"],
+#screen-quiz[data-fase="6"] {
+  background-image:
+    linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
+    url("./img/fundo-manaus.jpg");
   background-size: cover;
   background-position: center;
 }
