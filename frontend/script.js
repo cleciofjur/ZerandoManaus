@@ -466,17 +466,37 @@ function openLevel(levelNumber) {
 }
 
 function renderLevel() {
-  if (!document.getElementById("screen-level")) return;
-   // marca qual fase está aberta (o CSS usa isso para trocar o fundo)
-  document.getElementById("screen-level").dataset.fase = gameState.currentLevel;
-  document.getElementById("screen-quiz").dataset.fase = gameState.currentLevel;
+  const screenLevel = document.getElementById("screen-level");
+  const screenQuiz = document.getElementById("screen-quiz");
+
+  if (!screenLevel) return;
+
+  if (screenLevel) {
+    screenLevel.dataset = screenLevel.dataset || {};
+    screenLevel.dataset.fase = gameState.currentLevel;
+  }
+  if (screenQuiz) {
+    screenQuiz.dataset = screenQuiz.dataset || {};
+    screenQuiz.dataset.fase = gameState.currentLevel;
+  }
+
   const location = manausLocations[gameState.currentLevel];
-  document.getElementById("level-title").innerText = `Fase ${gameState.currentLevel}`;
-  document.getElementById("level-emoji").innerText = location.icon;
-  document.getElementById("location-category").innerText = location.category;
-  document.getElementById("location-name").innerText = location.name;
-  document.getElementById("location-description").innerText = location.description;
-  document.getElementById("location-challenge").innerText = location.challenge;
+  if (!location) return;
+
+  const levelTitle = document.getElementById("level-title");
+  const levelEmoji = document.getElementById("level-emoji");
+  const locationCategory = document.getElementById("location-category");
+  const locationName = document.getElementById("location-name");
+  const locationDescription = document.getElementById("location-description");
+  const locationChallenge = document.getElementById("location-challenge");
+
+  if (levelTitle) levelTitle.innerText = `Fase ${gameState.currentLevel}`;
+  if (levelEmoji) levelEmoji.innerText = location.icon;
+  if (locationCategory) locationCategory.innerText = location.category;
+  if (locationName) locationName.innerText = location.name;
+  if (locationDescription) locationDescription.innerText = location.description;
+  if (locationChallenge) locationChallenge.innerText = location.challenge;
+
   updateQuizButton();
 }
 
