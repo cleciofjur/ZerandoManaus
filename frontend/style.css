@@ -1028,3 +1028,23 @@
         gap: 10px;
         margin-top: 4px;
       }
+
+      /* Fundo exclusivo da fase 1: Teatro Amazonas */
+#screen-level[data-fase="1"],
+#screen-quiz[data-fase="1"] {
+  background-image:
+    linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
+    url("./img/fundo-teatro.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fundo exclusivo da fase 2: Mercado Municipal */
+#screen-level[data-fase="2"],
+#screen-quiz[data-fase="2"] {
+  background-image:
+    linear-gradient(rgba(6, 40, 30, 0.4), rgba(6, 40, 30, 0.4)),
+    url("./img/fundo-mercado.jpg");
+  background-size: cover;
+  background-position: center;
+}

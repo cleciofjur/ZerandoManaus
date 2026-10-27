@@ -467,6 +467,9 @@ function openLevel(levelNumber) {
 
 function renderLevel() {
   if (!document.getElementById("screen-level")) return;
+   // marca qual fase está aberta (o CSS usa isso para trocar o fundo)
+  document.getElementById("screen-level").dataset.fase = gameState.currentLevel;
+  document.getElementById("screen-quiz").dataset.fase = gameState.currentLevel;
   const location = manausLocations[gameState.currentLevel];
   document.getElementById("level-title").innerText = `Fase ${gameState.currentLevel}`;
   document.getElementById("level-emoji").innerText = location.icon;
