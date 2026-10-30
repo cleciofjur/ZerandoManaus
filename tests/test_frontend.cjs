@@ -9,13 +9,21 @@ const script = fs.readFileSync(path.join(front, 'script.js'), 'utf8');
 function game(file = 'fase.html', saved = null, search = '') {
   const html = fs.readFileSync(path.join(front, file), 'utf8');
   const nodes = new Map();
-  function node() {
+ function node() {
     const classes = new Set();
-    return { style: {}, classList: {
-      add: (...names) => names.forEach(n => classes.add(n)),
-      remove: (...names) => names.forEach(n => classes.delete(n)),
-      toggle: (n, on) => on ? classes.add(n) : classes.delete(n)
-    }, setAttribute() {}, appendChild() {}, scrollIntoView() {}, querySelector: () => node() };
+    return {
+      style: {},
+      dataset: {},
+      classList: {
+        add: (...names) => names.forEach(n => classes.add(n)),
+        remove: (...names) => names.forEach(n => classes.delete(n)),
+        toggle: (n, on) => on ? classes.add(n) : classes.delete(n)
+      },
+      setAttribute() {},
+      appendChild() {},
+      scrollIntoView() {},
+      querySelector: () => node()
+    };
   }
   for (const match of html.matchAll(/\bid="([^"]+)"/g)) nodes.set(match[1], node());
   let stored = saved;
