@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zerando-manaus-v4';
+const CACHE_NAME = 'zerando-manaus-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -8,7 +8,13 @@ const ASSETS_TO_CACHE = [
   './mapa.html',
   './perfil.html',
   './fase.html',
-  './img/fundo-manaus.jpg',
+  './img/fundo-tela.jpg',
+  './img/fundo-teatro.jpg',
+  './img/fundo-mercado.jpg',
+  './img/fundo-ponta.jpg',
+  './img/fundo-encontroAguas.jpg',
+  './img/fundo-musa.jpg',
+  './img/fundo-ponte.jpg',
   './script.js',
   './manifest.json'
 ];
