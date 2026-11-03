@@ -14,15 +14,19 @@ e abra http://localhost:8000. O backend FastAPI permanece separado em `main.py`.
 - `frontend/fase.html?fase=1`: desafio selecionado (fases de 1 a 6).
 - `frontend/style.css`: estilos compartilhados por todas as páginas.
 - `frontend/script.js`: lógica compartilhada e progresso no armazenamento do navegador.
-- `frontend/img/fundo-manaus.jpg`: imagem de fundo original, extraída do HTML.
+- `frontend/img/fundo-tela.jpg`: imagem de fundo original, extraída do HTML.
 
 Todas as páginas carregam `./style.css` e `./script.js`. Os caminhos de imagens
-em `url(...)` são relativos ao arquivo CSS: `./img/fundo-manaus.jpg`.
+em `url(...)` são relativos ao arquivo CSS: `./img/fundo-tela.jpg`.
 `styles.css` importa `style.css` para manter referências antigas compatíveis.
 
 Prefira acessar pelo servidor local para compartilhar o progresso entre as telas.
-O Service Worker de `sw.js` é registrado automaticamente. A versão v4 substitui
+O Service Worker de `sw.js` é registrado automaticamente. A versão v5 substitui
 os caches antigos e permite jogar offline depois do primeiro acesso completo.
+
+## Publicar na Vercel
+
+O vercel.json da raiz publica a pasta frontend/ como site estático. Mantenha Root Directory vazio, Framework Preset Other e produção na branch main. A API continua separada da interface. O cache v5 inclui todos os fundos das fases; incremente CACHE_NAME ao alterar os recursos pré-carregados.
 
 ## Quiz e progresso
 
@@ -57,7 +61,7 @@ Com as dependências Python instaladas e Node.js 20 ou mais recente:
 
 ```sh
 python -m pytest -q
-node --test tests/test_frontend.cjs
+node --test tests/test_frontend.cjs tests/test_sw.cjs
 node --check frontend/script.js
 node --check frontend/sw.js
 ```
